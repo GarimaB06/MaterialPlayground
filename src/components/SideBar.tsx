@@ -7,7 +7,6 @@ import { SideBarProps } from "../types";
 const SideBar: React.FC<SideBarProps> = ({
 	initialWidth,
 	minWidth,
-	maxWidth,
 	sideBarWidth,
 	setSidebarWidth,
 	isResizing,
@@ -33,7 +32,7 @@ const SideBar: React.FC<SideBarProps> = ({
 			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("mouseup", handleMouseUp);
 		};
-	}, [isResizing, minWidth, maxWidth]);
+	}, [isResizing]);
 
 	const handleToggleCollapse = () => {
 		setSidebarWidth(collapsed ? initialWidth : minWidth);

@@ -3,16 +3,15 @@ import { MaterialProps, MaterialPreviewProps } from "../types";
 import ThreeDObject from "./ThreeDObject";
 import MaterialForm from "./MaterialForm";
 
-const MaterialPreview: React.FC<MaterialPreviewProps> = ({ sideBarWidth }) => {
+const MaterialPreview: React.FC<MaterialPreviewProps> = () => {
 	const [materialOptions, setMaterialOptions] = useState<MaterialProps>({
-		color: "#ffffff",
+		color: "#4C95CD",
 		metalness: 0.5,
 		roughness: 0.5,
 		materialType: "meshStandardMaterial",
 	});
 
 	const handleMaterialChange = (newOptions: Partial<MaterialProps>) => {
-		// setMaterialOptions(newOptions);
 		setMaterialOptions((prevOptions) => ({
 			...prevOptions,
 			...newOptions,
@@ -23,7 +22,7 @@ const MaterialPreview: React.FC<MaterialPreviewProps> = ({ sideBarWidth }) => {
 		<div
 			className="material-preview"
 			style={{
-				width: `calc(100% - ${sideBarWidth}px)`,
+				width: "100vw",
 				display: "flex",
 				flexDirection: "row",
 				height: "100vh",
@@ -33,9 +32,7 @@ const MaterialPreview: React.FC<MaterialPreviewProps> = ({ sideBarWidth }) => {
 				onMaterialChange={handleMaterialChange}
 				materialOptions={materialOptions}
 			/>
-			<div>
-				<ThreeDObject materialOptions={materialOptions} />
-			</div>
+			<ThreeDObject materialOptions={materialOptions} />
 		</div>
 	);
 };

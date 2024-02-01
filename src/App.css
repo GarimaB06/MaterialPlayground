@@ -1,5 +1,4 @@
 body {
-	background-color: #13120f;
 }
 
 .side-button {
@@ -12,6 +11,7 @@ body {
 	cursor: ew-resize;
 	border: none;
 	background-color: transparent;
+	z-index: 2;
 }
 
 .side-button:hover {
@@ -37,7 +37,7 @@ body {
 	border-radius: 50%;
 	cursor: pointer;
 	transform: translate(+50%);
-	z-index: 1;
+	z-index: 3;
 }
 .arrow-button:hover {
 	background-color: #bc80f8e6;
@@ -48,21 +48,23 @@ body {
 }
 .side-bar {
 	height: 100vh;
-	max-width: 90%;
+	position: absolute;
 	background-color: #353535;
-	position: relative;
 	transition: width 0.3s;
+	z-index: 4;
 }
 .material-preview {
-	background-color: #13120f;
+	display: flex;
+	background-color: #34343489;
 	color: white;
 	transition: width 0.3s;
+	min-width: 950px;
 }
 
 .canvas-container {
 	background-color: #34343429;
-	width: 100vh;
 	height: 100vh;
+	width: 600px;
 }
 
 .material-form {
@@ -70,16 +72,24 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border-radius: 10px;
-	padding: 30px;
-	height: 100vh;
+	padding-right: 50px;
+	padding-left: 50px;
+	height: 500px;
+	border-radius: 30px;
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	z-index: 2;
 }
 
 select {
 	width: 250px;
-	margin: 10px;
 	padding: 10px;
 	border-radius: 10px;
+}
+
+label {
+	margin-top: 20px;
 }
 
 label {
