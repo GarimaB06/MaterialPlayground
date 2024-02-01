@@ -1,12 +1,6 @@
 import React from "react";
 import { MaterialFormProps } from "../types";
-
-const MATERIAL_STRINGS = [
-	"meshBasicMaterial",
-	"meshStandardMaterial",
-	"meshPhysicalMaterial",
-	"meshToonMaterial",
-];
+import { MATERIAL_STRINGS } from "../utils/constants";
 
 const MaterialForm: React.FC<MaterialFormProps> = ({
 	onMaterialChange,

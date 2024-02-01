@@ -1,7 +1,6 @@
 export interface SideBarProps {
 	initialWidth: number;
 	minWidth: number;
-	maxWidth: number;
 	sideBarWidth: number;
 	setSidebarWidth: (width: number) => void;
 	isResizing: boolean;
