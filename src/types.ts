@@ -3,11 +3,23 @@ export interface SideBarProps {
 	minWidth: number;
 	maxWidth: number;
 	sideBarWidth: number;
-	setSidebarWidth: any;
+	setSidebarWidth: (width: number) => void;
 	isResizing: boolean;
-	setIsResizing: any;
+	setIsResizing: (resizing: boolean) => void;
 }
 
 export interface MaterialPreviewProps {
 	sideBarWidth: number;
+}
+
+export interface MaterialProps {
+	color: string;
+	metalness: number;
+	roughness: number;
+	materialType: string;
+}
+
+export interface MaterialFormProps {
+	onMaterialChange?: (newMaterial: Partial<MaterialProps>) => void;
+	materialOptions: MaterialProps;
 }
