@@ -4,11 +4,19 @@ import MaterialPreview from "./components/MaterialPreview";
 import "./App.css";
 
 function App() {
-	const [isResizing, setIsResizing] = useState(false);
-	const [sideBarWidth, setSidebarWidth] = useState(350);
+	const [isResizing, setIsResizing] = useState<boolean>(false);
+	const [sideBarWidth, setSidebarWidth] = useState<number>(350);
+	const [objectList, setObjectList] = useState<any[]>([]);
+	const [currentSelectionId, setCurrentSelectionId] = useState<string | null>(
+		null
+	);
 
 	return (
-		<div className={isResizing ? "resizing" : ""} style={{ display: "flex" }}>
+		<div
+			// this className helps remove the transition property when resizing the sidebar (as it is causing a lag)
+			className={isResizing ? "resizing" : ""}
+			style={{ display: "flex" }}
+		>
 			<SideBar
 				initialWidth={300}
 				minWidth={20}
@@ -16,8 +24,18 @@ function App() {
 				setSidebarWidth={setSidebarWidth}
 				isResizing={isResizing}
 				setIsResizing={setIsResizing}
+				objectList={objectList}
+				setObjectList={setObjectList}
+				currentSelectionId={currentSelectionId}
+				setCurrentSelectionId={setCurrentSelectionId}
 			/>
-			<MaterialPreview sideBarWidth={sideBarWidth} />
+			<MaterialPreview
+				sideBarWidth={sideBarWidth}
+				objectList={objectList}
+				setObjectList={setObjectList}
+				currentSelectionId={currentSelectionId}
+				setCurrentSelectionId={setCurrentSelectionId}
+			/>
 		</div>
 	);
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import leftArrow from "../assets/left-arrow.png";
 import rightArrow from "../assets/right-arrow.png";
 import leftAndRight from "../assets/left-and-right.png";
-import { SideBarProps } from "../types";
+import ObjectIcon from "./ObjectIcon";
+import { ObjectType, SideBarProps } from "../types";
 
 const SideBar: React.FC<SideBarProps> = ({
 	initialWidth,
@@ -11,6 +12,10 @@ const SideBar: React.FC<SideBarProps> = ({
 	setSidebarWidth,
 	isResizing,
 	setIsResizing,
+	objectList,
+	setObjectList,
+	currentSelectionId,
+	setCurrentSelectionId,
 }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
@@ -53,6 +58,24 @@ const SideBar: React.FC<SideBarProps> = ({
 		}
 	};
 
+	const renderList = () => {
+		return objectList.map((obj: ObjectType, index: number) => {
+			const { materialId, materialOptions } = obj;
+			return (
+				<ObjectIcon
+					key={materialId}
+					materialOptions={materialOptions}
+					materialId={materialId}
+					objectList={objectList}
+					setObjectList={setObjectList}
+					index={index}
+					currentSelectionId={currentSelectionId}
+					setCurrentSelectionId={setCurrentSelectionId}
+				/>
+			);
+		});
+	};
+
 	return (
 		<div
 			className="side-bar"
@@ -67,6 +90,7 @@ const SideBar: React.FC<SideBarProps> = ({
 				className="arrow-button"
 			/>
 			<button onMouseDown={handleMouseDown} className="side-button" />
+			<div className="sidebar-icon-list">{renderList()}</div>
 		</div>
 	);
 };

@@ -13,7 +13,6 @@ body {
 	background-color: transparent;
 	z-index: 2;
 }
-
 .side-button:hover {
 	border-right: 1.5px #9333eae6 solid;
 	border-radius: 0px;
@@ -37,7 +36,7 @@ body {
 	border-radius: 50%;
 	cursor: pointer;
 	transform: translate(+50%);
-	z-index: 3;
+	z-index: 4;
 }
 .arrow-button:hover {
 	background-color: #bc80f8e6;
@@ -48,23 +47,69 @@ body {
 }
 .side-bar {
 	height: 100vh;
+	/* overflow: auto; */
 	position: absolute;
 	background-color: #353535;
 	transition: width 0.3s;
 	z-index: 4;
 }
+.sidebar-icon-list {
+	max-height: 100vh;
+	overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
+}
+
+.object-icon {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #444;
+	border-radius: 30px;
+	width: 150px;
+	height: 150px;
+	margin: 10px;
+}
+.object-icon.highlighted {
+	box-shadow: #bc80f8e6 0px 0px 0px 1px;
+}
+.action-icons {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+}
+
+.action-icon {
+	background: none;
+	border: none;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+	margin: 10px;
+}
+
+.action-icon img {
+	max-width: 20px;
+	max-height: 20px;
+}
+
 .material-preview {
 	display: flex;
 	background-color: #34343489;
 	color: white;
-	transition: width 0.3s;
 	min-width: 950px;
 }
 
 .canvas-container {
 	background-color: #34343429;
 	height: 100vh;
-	width: 600px;
+	width: 100vw;
+	/* width: 600px; */
 }
 
 .material-form {

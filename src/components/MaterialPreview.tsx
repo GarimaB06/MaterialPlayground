@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MaterialProps, MaterialPreviewProps } from "../types";
+import { DEFAULT_MATERIAL_CONFIG } from "../utils/constants";
 import ThreeDObject from "./ThreeDObject";
-import MaterialForm from "./MaterialForm";
+import MaterialEditor from "./MaterialEditor";
 
-const MaterialPreview: React.FC<MaterialPreviewProps> = () => {
-	const [materialOptions, setMaterialOptions] = useState<MaterialProps>({
-		color: "#4C95CD",
-		metalness: 0.5,
-		roughness: 0.5,
-		materialType: "meshStandardMaterial",
-	});
+const MaterialPreview: React.FC<MaterialPreviewProps> = ({
+	objectList,
+	setObjectList,
+	currentSelectionId,
+	setCurrentSelectionId,
+}) => {
+	const [materialOptions, setMaterialOptions] = useState<MaterialProps>(
+		DEFAULT_MATERIAL_CONFIG
+	);
+
+	useEffect(() => {
+		if (currentSelectionId) {
+			const selectedId = objectList.findIndex(
+				(obj) => obj.materialId === currentSelectionId
+			);
+			const selectedObject = objectList[selectedId];
+			setMaterialOptions(selectedObject.materialOptions);
+		}
+	}, [currentSelectionId]);
 
 	const handleMaterialChange = (newOptions: Partial<MaterialProps>) => {
 		setMaterialOptions((prevOptions) => ({
@@ -28,9 +41,14 @@ const MaterialPreview: React.FC<MaterialPreviewProps> = () => {
 				height: "100vh",
 			}}
 		>
-			<MaterialForm
+			<MaterialEditor
 				onMaterialChange={handleMaterialChange}
 				materialOptions={materialOptions}
+				objectList={objectList}
+				setObjectList={setObjectList}
+				currentSelectionId={currentSelectionId}
+				setMaterialOptions={setMaterialOptions}
+				setCurrentSelectionId={setCurrentSelectionId}
 			/>
 			<ThreeDObject materialOptions={materialOptions} />
 		</div>
