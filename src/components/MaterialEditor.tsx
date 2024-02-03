@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MaterialEditorProps } from "../types";
 import { MATERIAL_STRINGS, DEFAULT_MATERIAL_CONFIG } from "../utils/constants";
 
@@ -9,6 +10,12 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 	setMaterialOptions,
 	setCurrentSelectionId,
 }) => {
+	useEffect(() => {
+		if (currentSelectionId === null) {
+			resetOptions();
+		}
+	}, [currentSelectionId]);
+
 	const resetOptions = () => {
 		setCurrentSelectionId(null);
 		setMaterialOptions(DEFAULT_MATERIAL_CONFIG);

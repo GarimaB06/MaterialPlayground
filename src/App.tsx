@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "./components/SideBar";
 import MaterialPreview from "./components/MaterialPreview";
 import "./App.css";
 
-function App() {
+const App = () => {
 	const [isResizing, setIsResizing] = useState<boolean>(false);
 	const [sideBarWidth, setSidebarWidth] = useState<number>(350);
-	const [objectList, setObjectList] = useState<any[]>([]);
+
+	const getPersistedObjectList = () => {
+		const storedObjectList = localStorage.getItem("objectList");
+		return storedObjectList ? JSON.parse(storedObjectList) : [];
+	};
+
+	const [objectList, setObjectList] = useState<any[]>(getPersistedObjectList);
 	const [currentSelectionId, setCurrentSelectionId] = useState<string | null>(
 		null
 	);
+
+	const setPersistedObjectList = () => {
+		localStorage.setItem("objectList", JSON.stringify(objectList));
+	};
+
+	useEffect(() => {
+		setPersistedObjectList();
+	}, [objectList]);
 
 	return (
 		<div
@@ -18,7 +32,7 @@ function App() {
 			style={{ display: "flex" }}
 		>
 			<SideBar
-				initialWidth={300}
+				initialWidth={350}
 				minWidth={20}
 				sideBarWidth={sideBarWidth}
 				setSidebarWidth={setSidebarWidth}
@@ -38,6 +52,6 @@ function App() {
 			/>
 		</div>
 	);
-}
+};
 
 export default App;

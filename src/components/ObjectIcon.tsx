@@ -23,6 +23,7 @@ const ObjectIcon: React.FC<ObjectIconProps> = ({
 		setObjectList(newSetObjectList);
 		if (highlighted) setCurrentSelectionId(null);
 	};
+
 	const _className: string = `object-icon${highlighted ? " highlighted" : ""}`;
 	return (
 		<div className={_className}>
