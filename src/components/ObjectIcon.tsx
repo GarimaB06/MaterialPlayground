@@ -33,10 +33,18 @@ const ObjectIcon: React.FC<ObjectIconProps> = ({
 				<RotatingSphere {...materialOptions} />
 			</Canvas>
 			<div className="action-icons">
-				<button className="action-icon" onClick={updateCurrentSelectionId}>
+				<button
+					aria-label={`edit material with material ID: ${materialId}`}
+					className="action-icon"
+					onClick={updateCurrentSelectionId}
+				>
 					<img src={edit} alt="edit" />
 				</button>
-				<button className="action-icon" onClick={() => deleteObject(index)}>
+				<button
+					aria-label={`delete material with material ID: ${materialId}`}
+					className="action-icon"
+					onClick={() => deleteObject(index)}
+				>
 					<img src={trash} alt="trash" />
 				</button>
 			</div>

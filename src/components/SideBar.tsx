@@ -4,6 +4,7 @@ import rightArrow from "../assets/right-arrow.png";
 import leftAndRight from "../assets/left-and-right.png";
 import ObjectIcon from "./ObjectIcon";
 import { ObjectType, SideBarProps } from "../types";
+import { COLLAPSE_THRESHOLD_WIDTH } from "../utils/constants";
 
 const SideBar: React.FC<SideBarProps> = ({
 	initialWidth,
@@ -20,9 +21,23 @@ const SideBar: React.FC<SideBarProps> = ({
 	const [collapsed, setCollapsed] = useState(false);
 
 	useEffect(() => {
+		/**
+		 * When resizing is done (the user releases the side button), if the width
+		 * is below or above the defined threshold (COLLAPSE_THRESHOLD_WIDTH),
+		 * we'll make the sidebar collapsed or expanded.
+		 */
+		if (!isResizing) {
+			if (!collapsed && sideBarWidth < COLLAPSE_THRESHOLD_WIDTH) {
+				setCollapsed(true);
+				setSidebarWidth(minWidth);
+			} else if (collapsed && sideBarWidth > COLLAPSE_THRESHOLD_WIDTH) {
+				setCollapsed(false);
+			}
+		}
 		const handleMouseMove = (event: MouseEvent) => {
 			if (isResizing) {
-				setSidebarWidth(event.clientX);
+				const newWidth = event.clientX;
+				setSidebarWidth(newWidth);
 			}
 		};
 
@@ -32,7 +47,6 @@ const SideBar: React.FC<SideBarProps> = ({
 
 		document.addEventListener("mousemove", handleMouseMove);
 		document.addEventListener("mouseup", handleMouseUp);
-
 		return () => {
 			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("mouseup", handleMouseUp);

@@ -58,7 +58,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 	return (
 		<form className="material-form">
 			<label>
-				Material Type:
+				Material Type
 				<select
 					value={materialOptions.materialType}
 					onChange={(event) => handleFormValueChange(event, "materialType")}
@@ -72,7 +72,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 			</label>
 			<div>
 				<label>
-					Color:
+					Color
 					<input
 						type="color"
 						value={materialOptions.color}
@@ -82,7 +82,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 			</div>
 			<div>
 				<label>
-					Metalness:
+					Metalness
 					<input
 						type="range"
 						min={0}
@@ -96,7 +96,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 			</div>
 			<div>
 				<label>
-					Roughness:
+					Roughness
 					<input
 						type="range"
 						min={0}
@@ -109,6 +109,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 				</label>
 			</div>
 			<button
+				aria-label={currentSelectionId ? "Update Object" : "Create Object"}
 				type="button"
 				onClick={currentSelectionId ? updateObject : createObject}
 			>

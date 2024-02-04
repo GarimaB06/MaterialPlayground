@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import SideBar from "./components/SideBar";
 import MaterialPreview from "./components/MaterialPreview";
+import useInitialWidth from "./utils/useInitialWidth";
 import "./App.css";
 
 const App = () => {
+	const initialWidth = useInitialWidth();
 	const [isResizing, setIsResizing] = useState<boolean>(false);
-	const [sideBarWidth, setSidebarWidth] = useState<number>(350);
+	const [sideBarWidth, setSidebarWidth] = useState<number>(initialWidth);
 
 	const getPersistedObjectList = () => {
 		const storedObjectList = localStorage.getItem("objectList");
@@ -27,12 +29,17 @@ const App = () => {
 
 	return (
 		<div
-			// this className helps remove the transition property when resizing the sidebar (as it is causing a lag)
+			/**
+			 * This className helps remove the transition property
+			 * when resizing the sidebar (as the transition
+			 * causes a lag when grabbingsidebar edge and resizing)
+			 *
+			 */
 			className={isResizing ? "resizing" : ""}
 			style={{ display: "flex" }}
 		>
 			<SideBar
-				initialWidth={350}
+				initialWidth={initialWidth}
 				minWidth={20}
 				sideBarWidth={sideBarWidth}
 				setSidebarWidth={setSidebarWidth}
