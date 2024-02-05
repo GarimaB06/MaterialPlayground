@@ -32,17 +32,17 @@ const ObjectIcon: React.FC<ObjectIconProps> = ({
 				<directionalLight color="white" position={[0, 5, 5]} />
 				<RotatingSphere {...materialOptions} />
 			</Canvas>
-			<div className="action-icons">
+			<div className="action-buttons">
 				<button
 					aria-label={`edit material with material ID: ${materialId}`}
-					className="action-icon"
+					className="action-button primary"
 					onClick={updateCurrentSelectionId}
 				>
 					<img src={edit} alt="edit" />
 				</button>
 				<button
 					aria-label={`delete material with material ID: ${materialId}`}
-					className="action-icon"
+					className="action-button primary"
 					onClick={() => deleteObject(index)}
 				>
 					<img src={trash} alt="trash" />

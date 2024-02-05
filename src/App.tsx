@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import SideBar from "./components/SideBar";
 import MaterialPreview from "./components/MaterialPreview";
 import useInitialWidth from "./utils/useInitialWidth";
-import "./App.css";
+import SideBar from "./components/SideBar";
+import "./App.scss";
+import { ObjectType } from "./types";
 
-const App = () => {
+const App: React.FC = () => {
 	const initialWidth = useInitialWidth();
 	const [isResizing, setIsResizing] = useState<boolean>(false);
 	const [sideBarWidth, setSidebarWidth] = useState<number>(initialWidth);
@@ -14,7 +15,9 @@ const App = () => {
 		return storedObjectList ? JSON.parse(storedObjectList) : [];
 	};
 
-	const [objectList, setObjectList] = useState<any[]>(getPersistedObjectList);
+	const [objectList, setObjectList] = useState<ObjectType[]>(
+		getPersistedObjectList
+	);
 	const [currentSelectionId, setCurrentSelectionId] = useState<string | null>(
 		null
 	);
@@ -35,8 +38,7 @@ const App = () => {
 			 * causes a lag when grabbingsidebar edge and resizing)
 			 *
 			 */
-			className={isResizing ? "resizing" : ""}
-			style={{ display: "flex" }}
+			className={`app${isResizing ? " resizing" : ""}`}
 		>
 			<SideBar
 				initialWidth={initialWidth}

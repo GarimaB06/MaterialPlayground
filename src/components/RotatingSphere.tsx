@@ -44,7 +44,6 @@ const RotatingSphere: React.FC<MaterialProps> = ({
 		<mesh ref={sphereRef}>
 			<ambientLight intensity={1} />
 			<directionalLight intensity={0.5} position={[5, 5, 5]} />
-			{/* <boxGeometry args={[2, 2, 2]} /> */}
 			<sphereGeometry args={[1, 32, 32]} />
 			{renderMaterial()}
 		</mesh>

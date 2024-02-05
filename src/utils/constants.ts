@@ -7,7 +7,7 @@ export const MATERIAL_STRINGS: string[] = [
 ];
 
 export const DEFAULT_MATERIAL_CONFIG: MaterialProps = {
-	color: "#4C95CD",
+	color: "#FFFFFF",
 	metalness: 0.5,
 	roughness: 0.5,
 	materialType: "meshStandardMaterial",
@@ -21,3 +21,8 @@ export const INITIAL_SIDEBAR_WIDTH_MAP = {
 };
 
 export const COLLAPSE_THRESHOLD_WIDTH = 175;
+
+export const BASIC_MATERIAL_TYPES: string[] = [
+	"meshBasicMaterial",
+	"meshToonMaterial",
+];

@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import { MaterialEditorProps } from "../types";
-import { MATERIAL_STRINGS, DEFAULT_MATERIAL_CONFIG } from "../utils/constants";
+import {
+	MATERIAL_STRINGS,
+	DEFAULT_MATERIAL_CONFIG,
+	BASIC_MATERIAL_TYPES,
+} from "../utils/constants";
 
 const MaterialEditor: React.FC<MaterialEditorProps> = ({
 	onMaterialChange,
 	materialOptions,
+	objectList,
 	setObjectList,
 	currentSelectionId,
 	setMaterialOptions,
@@ -27,24 +32,20 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 			materialId: uniqueKey,
 			materialOptions,
 		};
-		setObjectList((prevObjectList: any) => [...prevObjectList, newObject]);
+		setObjectList([...objectList, newObject]);
 		resetOptions();
 	};
 
 	const updateObject = () => {
-		setObjectList((prevObjectList: any) => {
-			const newList = [...prevObjectList];
-			const objectToBeUpdatedIndex = newList.findIndex(
-				(obj) => obj.materialId === currentSelectionId
-			);
-			newList.splice(objectToBeUpdatedIndex, 1, {
-				materialId: currentSelectionId,
-				materialOptions,
-			});
-
-			return newList;
+		const newList = [...objectList];
+		const updateIndex = newList.findIndex(
+			(obj) => obj.materialId === currentSelectionId
+		);
+		newList.splice(updateIndex, 1, {
+			materialId: currentSelectionId,
+			materialOptions,
 		});
-
+		setObjectList(newList);
 		resetOptions();
 	};
 
@@ -54,6 +55,10 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 	) => {
 		onMaterialChange?.({ ...materialOptions, [key]: event.target.value });
 	};
+
+	const isBasicMaterialType = BASIC_MATERIAL_TYPES.includes(
+		materialOptions.materialType
+	);
 
 	return (
 		<form className="material-form">
@@ -84,6 +89,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 				<label>
 					Metalness
 					<input
+						disabled={isBasicMaterialType}
 						type="range"
 						min={0}
 						max={1}
@@ -98,6 +104,7 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 				<label>
 					Roughness
 					<input
+						disabled={isBasicMaterialType}
 						type="range"
 						min={0}
 						max={1}
@@ -108,13 +115,19 @@ const MaterialEditor: React.FC<MaterialEditorProps> = ({
 					{materialOptions.roughness}
 				</label>
 			</div>
-			<button
-				aria-label={currentSelectionId ? "Update Object" : "Create Object"}
-				type="button"
-				onClick={currentSelectionId ? updateObject : createObject}
-			>
-				{currentSelectionId ? "Update Object" : "Create Object"}
-			</button>
+			<div className="form-buttons">
+				<button type="button" onClick={resetOptions} className="secondary">
+					{currentSelectionId ? "Cancel Edit" : "Reset"}
+				</button>
+				<button
+					className="primary"
+					aria-label={currentSelectionId ? "Update Object" : "Create Object"}
+					type="button"
+					onClick={currentSelectionId ? updateObject : createObject}
+				>
+					{currentSelectionId ? "Update Object" : "Create Object"}
+				</button>
+			</div>
 		</form>
 	);
 };

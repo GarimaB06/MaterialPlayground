@@ -53,6 +53,18 @@ const SideBar: React.FC<SideBarProps> = ({
 		};
 	}, [isResizing]);
 
+	/**
+	 * If the sidebar is collapsed, this effect will expand the sidebar
+	 * after an object has been created to provide feedback to the user,
+	 * that the new material has been added to the sidebar.
+	 */
+	useEffect(() => {
+		if (collapsed) {
+			setCollapsed(false);
+			setSidebarWidth(initialWidth);
+		}
+	}, [objectList.length]);
+
 	const handleToggleCollapse = () => {
 		setSidebarWidth(collapsed ? initialWidth : minWidth);
 		setCollapsed(!collapsed);
@@ -97,12 +109,9 @@ const SideBar: React.FC<SideBarProps> = ({
 				width: `${sideBarWidth}px`,
 			}}
 		>
-			<img
-				onMouseDown={handleToggleCollapse}
-				src={getArrowIcon()}
-				alt="Icon"
-				className="arrow-button"
-			/>
+			<button className="arrow-button" onClick={handleToggleCollapse}>
+				<img src={getArrowIcon()} alt="Icon" className="arrow-icon" />
+			</button>
 			<button onMouseDown={handleMouseDown} className="side-button" />
 			<div className="sidebar-icon-list">{renderList()}</div>
 		</div>

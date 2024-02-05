@@ -4,7 +4,7 @@ import { ThreeDObjectProps } from "../types";
 
 const ThreeDObject: React.FC<ThreeDObjectProps> = ({ materialOptions }) => {
 	return (
-		<div className="canvas-container" style={{ width: "100vw" }}>
+		<div className="canvas-container">
 			<Canvas>
 				<ambientLight intensity={0.3} />
 				<directionalLight color="white" position={[0, 5, 5]} />

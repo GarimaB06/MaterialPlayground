@@ -32,15 +32,7 @@ const MaterialPreview: React.FC<MaterialPreviewProps> = ({
 	};
 
 	return (
-		<div
-			className="material-preview"
-			style={{
-				width: "100vw",
-				display: "flex",
-				flexDirection: "row",
-				height: "100vh",
-			}}
-		>
+		<div className="material-preview">
 			<MaterialEditor
 				onMaterialChange={handleMaterialChange}
 				materialOptions={materialOptions}

@@ -4,9 +4,17 @@ export interface MaterialProps {
 	roughness: number;
 	materialType: string;
 }
+
 export interface ObjectType {
 	materialOptions: MaterialProps;
-	materialId: string;
+	materialId: string | null;
+}
+
+export interface CommonProps {
+	objectList: ObjectType[];
+	setObjectList: React.Dispatch<React.SetStateAction<ObjectType[]>>;
+	currentSelectionId: string | null;
+	setCurrentSelectionId: (currentSelectionId: string | null) => void;
 }
 
 export interface ThreeDObjectProps {
@@ -15,43 +23,27 @@ export interface ThreeDObjectProps {
 	materialOptions: MaterialProps;
 }
 
-export interface ObjectIconProps {
-	materialId: string;
+export interface ObjectIconProps extends CommonProps {
+	materialId: string | null;
 	materialOptions: MaterialProps;
-	objectList: ObjectType[];
-	setObjectList: any;
 	index: number;
-	currentSelectionId: string | null;
-	setCurrentSelectionId: any;
 }
 
-export interface SideBarProps {
+export interface SideBarProps extends CommonProps {
 	initialWidth: number;
 	minWidth: number;
 	sideBarWidth: number;
 	setSidebarWidth: (width: number) => void;
 	isResizing: boolean;
 	setIsResizing: (resizing: boolean) => void;
-	objectList: ObjectType[];
-	setObjectList: any;
-	currentSelectionId: string | null;
-	setCurrentSelectionId: any;
 }
 
-export interface MaterialPreviewProps {
+export interface MaterialPreviewProps extends CommonProps {
 	sideBarWidth: number;
-	objectList: ObjectType[];
-	setObjectList: any;
-	currentSelectionId: string | null;
-	setCurrentSelectionId: any;
 }
 
-export interface MaterialEditorProps {
+export interface MaterialEditorProps extends CommonProps {
 	onMaterialChange?: (newMaterial: Partial<MaterialProps>) => void;
 	materialOptions: MaterialProps;
-	objectList: ObjectType[];
-	setObjectList: any;
-	currentSelectionId: string | null;
-	setCurrentSelectionId: any;
-	setMaterialOptions: any;
+	setMaterialOptions: (materialOptions: MaterialProps) => void;
 }
