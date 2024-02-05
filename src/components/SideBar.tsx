@@ -2,23 +2,42 @@ import React, { useState, useEffect } from "react";
 import leftArrow from "../assets/left-arrow.png";
 import rightArrow from "../assets/right-arrow.png";
 import leftAndRight from "../assets/left-and-right.png";
-import { SideBarProps } from "../types";
+import ObjectIcon from "./ObjectIcon";
+import { ObjectType, SideBarProps } from "../types";
+import { COLLAPSE_THRESHOLD_WIDTH } from "../utils/constants";
 
 const SideBar: React.FC<SideBarProps> = ({
 	initialWidth,
 	minWidth,
-	maxWidth,
 	sideBarWidth,
 	setSidebarWidth,
 	isResizing,
 	setIsResizing,
+	objectList,
+	setObjectList,
+	currentSelectionId,
+	setCurrentSelectionId,
 }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	useEffect(() => {
+		/**
+		 * When resizing is done (the user releases the side button), if the width
+		 * is below or above the defined threshold (COLLAPSE_THRESHOLD_WIDTH),
+		 * we'll make the sidebar collapsed or expanded.
+		 */
+		if (!isResizing) {
+			if (!collapsed && sideBarWidth < COLLAPSE_THRESHOLD_WIDTH) {
+				setCollapsed(true);
+				setSidebarWidth(minWidth);
+			} else if (collapsed && sideBarWidth > COLLAPSE_THRESHOLD_WIDTH) {
+				setCollapsed(false);
+			}
+		}
 		const handleMouseMove = (event: MouseEvent) => {
 			if (isResizing) {
-				setSidebarWidth(event.clientX);
+				const newWidth = event.clientX;
+				setSidebarWidth(newWidth);
 			}
 		};
 
@@ -28,12 +47,23 @@ const SideBar: React.FC<SideBarProps> = ({
 
 		document.addEventListener("mousemove", handleMouseMove);
 		document.addEventListener("mouseup", handleMouseUp);
-
 		return () => {
 			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("mouseup", handleMouseUp);
 		};
-	}, [isResizing, minWidth, maxWidth]);
+	}, [isResizing]);
+
+	/**
+	 * If the sidebar is collapsed, this effect will expand the sidebar
+	 * after an object has been created to provide feedback to the user,
+	 * that the new material has been added to the sidebar.
+	 */
+	useEffect(() => {
+		if (collapsed) {
+			setCollapsed(false);
+			setSidebarWidth(initialWidth);
+		}
+	}, [objectList.length]);
 
 	const handleToggleCollapse = () => {
 		setSidebarWidth(collapsed ? initialWidth : minWidth);
@@ -54,6 +84,24 @@ const SideBar: React.FC<SideBarProps> = ({
 		}
 	};
 
+	const renderList = () => {
+		return objectList.map((obj: ObjectType, index: number) => {
+			const { materialId, materialOptions } = obj;
+			return (
+				<ObjectIcon
+					key={materialId}
+					materialOptions={materialOptions}
+					materialId={materialId}
+					objectList={objectList}
+					setObjectList={setObjectList}
+					index={index}
+					currentSelectionId={currentSelectionId}
+					setCurrentSelectionId={setCurrentSelectionId}
+				/>
+			);
+		});
+	};
+
 	return (
 		<div
 			className="side-bar"
@@ -61,13 +109,11 @@ const SideBar: React.FC<SideBarProps> = ({
 				width: `${sideBarWidth}px`,
 			}}
 		>
-			<img
-				onMouseDown={handleToggleCollapse}
-				src={getArrowIcon()}
-				alt="Icon"
-				className="arrow-button"
-			/>
+			<button className="arrow-button" onClick={handleToggleCollapse}>
+				<img src={getArrowIcon()} alt="Icon" className="arrow-icon" />
+			</button>
 			<button onMouseDown={handleMouseDown} className="side-button" />
+			<div className="sidebar-icon-list">{renderList()}</div>
 		</div>
 	);
 };

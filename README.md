@@ -1,30 +1,80 @@
-# React + TypeScript + Vite
+# MaterialPlayground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An simple React application to configure and view Three.js materials.
 
-Currently, two official plugins are available:
+## Key Features and Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Main View
 
-## Expanding the ESLint configuration
+Main UI that contains the material viewer and material form that allows the user to edit the material’s configurations.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Sidebar: Browse previews of created materials in a resizable and collapsible sidebar
 
-- Configure the top-level `parserOptions` property like this:
+- The sidebar is collapsible via a button with an arrow icon pointing left and right depending on if the sidebar is expanded or collapsed, respectively.
+- The sidebar is arbitrarily resizable via a grabbable button on the right edge of the sidebar. When the sidebar is being resized the cursor will be in the resize state and the collapse button icon will be a two-sided arrow.
+- If the user resizes the sidebar below a certain threshold width (175 pixels) that we’ve defined, the sidebar will be automatically put in the collapsed state.
+  The initial width of the sidebar will be different depending on whether the user’s viewport width is desktop ( > 675 pixels) or mobile ( < 675 pixels).
+- If the sidebar is collapsed when the user creates an objects, it will expand to show the user that the object has been added to the list.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Material Management: Create, edit, and remove materials with user-friendly interactions
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Create
+
+- In the main view the user can configure the material by material type, color, metalness and roughness. The color picker is an HTML input of type `color` and the metalness and roughness use HTML inputs of type `range`.
+- For the material types where metalness and roughness are not applicable, the inputs will be disabled.
+- Once the user clicks on the ‘Create Object’ button the material will be added to the list of created material objects in the sidebar, and the material in the main view will reset to the default material properties.
+- The user can reset their material options anytime with the "Reset" button.
+
+#### Edit
+
+- In the sidebar, created materials can be selected to view again in the main view by clicking on the edit button (pencil).
+- The material that’s currently being edited will be highlighted in the sidebar.
+- Any changes made to the material in the main view can be saved again by clicking on the “Update Object” button (which was the “Create Object” button) in the form.
+- After updating the object, the material in the main view will reset to the default material properties.
+- The user can reset their material options anytime with the "Cancel Edit" but.
+
+#### Delete
+
+- Each created material object in the sidebar list will have a delete button, which removes it from the sidebar.
+
+### Persistence
+
+A list of created materials are persisted between sessions to ensure data continuity. The browser’s local storage is used to achieve this.
+
+### Responsive Design
+
+The app is designed to work seamlessly across various screen sizes and input devices.
+
+### Accessibility
+
+- All actionable UI are HTML Inputs, Buttons, or Selects. These ensures all keyboard shortcuts function as users would expect
+- All Buttons have aria-labels to inform screen readers the purpose of the button
+- All Inputs and Selects are wrapped in labels to make clear to the user what value is being edit
+- I wanted to have a UI effect where the edit and delete buttons only appear over the material icon when it is hovered on in the sidebar, but in testing, this was very poor accessibility as it prevented tabbing from working correctly
+
+## Installing and Running the Application
+
+1. **Installation:**
+
+   - Clone the repository:
+
+   ```
+   git clone https://github.com/GarimaB06/MaterialPlayground.git
+   ```
+
+   - Install dependencies:
+
+   ```
+   npm install
+   ```
+
+2. **Run the Application:**
+
+   - Start the frontend application:
+
+   ```
+   npm run dev
+   ```
+
+3. **Access the Application:**
+   - Open your browser and navigate to `http://localhost:5173/`.
