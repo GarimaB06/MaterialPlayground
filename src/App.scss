@@ -1,0 +1,250 @@
+$primary-purple: #9333eae6;
+$highlight-purple: #bc80f8e6;
+
+.center-flexed {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+//
+// General styles
+//
+body input:focus,
+body select:focus,
+body button:focus-within {
+	outline: 1px solid $highlight-purple;
+}
+
+.app {
+	display: flex;
+}
+
+button {
+	transition: background-color 0.2s;
+	&.primary {
+		background-color: $primary-purple;
+		&:focus-within,
+		&:hover {
+			background-color: #232324;
+		}
+	}
+	&.secondary {
+		background-color: transparent;
+		border: 1px solid;
+	}
+}
+
+// Side button styles
+.side-button {
+	border-radius: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 5px;
+	height: 100vh;
+	cursor: ew-resize;
+	border: none;
+	background-color: transparent;
+	z-index: 2;
+
+	&:hover {
+		border-right: 1.5px $primary-purple solid;
+		border-radius: 0;
+	}
+
+	&:active {
+		border-right: 1.5px $primary-purple solid;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+// Arrow button styles
+.arrow-button {
+	@extend .center-flexed;
+	position: absolute;
+	top: 10%;
+	right: 0;
+	padding: 8px;
+	background-color: $primary-purple;
+	border-radius: 50%;
+	cursor: pointer;
+	transform: translate(+50%);
+	z-index: 4;
+	height: 32px;
+	aspect-ratio: 1;
+	transition: background-color 0.1s;
+
+	.arrow-icon {
+		max-width: 12px;
+		max-height: 12px;
+	}
+
+	&:hover {
+		background-color: $highlight-purple;
+	}
+}
+
+// Resizing styles
+.resizing .side-bar,
+.resizing .material-preview {
+	transition: none;
+}
+
+// Side bar styles
+.side-bar {
+	height: 100vh;
+	position: absolute;
+	background-color: #353535;
+	transition: width 0.3s;
+	z-index: 4;
+}
+
+// Sidebar icon list styles
+.sidebar-icon-list {
+	max-height: 100vh;
+	overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
+}
+
+// Object icon styles
+.object-icon {
+	@extend .center-flexed;
+	position: relative;
+	flex-direction: column;
+	background-color: #444;
+	border-radius: 30px;
+	width: 150px;
+	height: 150px;
+	margin: 10px;
+
+	&.highlighted {
+		box-shadow: $highlight-purple 0 0 0 1px;
+	}
+}
+
+// Action buttons styles
+.action-buttons {
+	@extend .center-flexed;
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+}
+
+.action-button {
+	@extend .center-flexed;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	margin: 8px;
+	border-radius: 30%;
+	height: 30px;
+	width: 30px;
+	transition: box-shadow 0.1s;
+	&.primary {
+		background-color: transparent;
+	}
+
+	&:hover {
+		box-shadow: $highlight-purple 0 0 0 1px;
+	}
+
+	img {
+		max-width: 20px;
+		max-height: 20px;
+	}
+}
+
+// Material preview styles
+.material-preview {
+	display: flex;
+	flex-direction: row;
+	background-color: #34343489;
+	color: white;
+	width: 100vw;
+	height: 100vh;
+}
+
+// Canvas container styles
+.canvas-container {
+	background-color: #34343429;
+	height: 100vh;
+	width: 100vw;
+}
+
+// Material form styles
+.material-form {
+	@extend .center-flexed;
+	background-color: #34343489;
+	flex-direction: column;
+	padding: 2rem;
+	border-radius: 30px;
+	position: fixed;
+	z-index: 2;
+	width: 320px;
+
+	.form-buttons {
+		display: flex;
+		button {
+			width: 160px;
+			&:first-of-type {
+				margin-right: 12px;
+			}
+		}
+	}
+}
+
+// Select and label styles
+select {
+	width: 250px;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+label {
+	@extend .center-flexed;
+	margin-bottom: 15px;
+	flex-direction: column;
+	color: #e3c7ffe6;
+
+	select,
+	input {
+		margin-top: 5px;
+	}
+}
+
+// Media queries
+@media only screen and (min-width: 880px) {
+	.material-form {
+		top: 1rem;
+		right: 1rem;
+	}
+}
+
+@media only screen and (max-width: 879px) {
+	.canvas-container {
+		margin-top: -12rem;
+	}
+	.material-form {
+		padding: 1rem 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0;
+		min-width: 100%;
+		.form-buttons {
+			flex-direction: column-reverse;
+			width: 60%;
+			button {
+				width: 100%;
+				margin-bottom: 0.75rem;
+			}
+		}
+	}
+}
