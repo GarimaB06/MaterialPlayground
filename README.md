@@ -18,6 +18,9 @@ Main UI that contains the material viewer and material form that allows the user
 
 ### Material Management: Create, edit, and remove materials with user-friendly interactions
 
+
+https://github.com/GarimaB06/MaterialPlayground/assets/68969765/1246a619-176a-4c29-ae0a-b8a53d663bdc
+
 #### Create
 
 - In the main view the user can configure the material by material type, color, metalness and roughness. The color picker is an HTML input of type `color` and the metalness and roughness use HTML inputs of type `range`.
@@ -44,6 +47,9 @@ A list of created materials are persisted between sessions to ensure data contin
 ### Responsive Design
 
 The app is designed to work seamlessly across various screen sizes and input devices.
+
+https://github.com/GarimaB06/MaterialPlayground/assets/68969765/f2edd80f-2683-4628-b378-26020eb864d2
+
 
 ### Accessibility
 
