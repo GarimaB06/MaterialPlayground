@@ -1,6 +1,6 @@
 # MaterialPlayground
 
-An simple React application to configure and view Three.js materials.
+A simple React application to configure and view Three.js materials.
 
 ## Key Features and Components
 
