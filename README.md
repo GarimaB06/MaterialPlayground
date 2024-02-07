@@ -56,7 +56,6 @@ https://github.com/GarimaB06/MaterialPlayground/assets/68969765/f2edd80f-2683-46
 - All actionable UI are HTML Inputs, Buttons, or Selects. These ensures all keyboard shortcuts function as users would expect
 - All Buttons have aria-labels to inform screen readers the purpose of the button
 - All Inputs and Selects are wrapped in labels to make clear to the user what value is being edit
-- I wanted to have a UI effect where the edit and delete buttons only appear over the material icon when it is hovered on in the sidebar, but in testing, this was very poor accessibility as it prevented tabbing from working correctly
 
 ## Installing and Running the Application
 
