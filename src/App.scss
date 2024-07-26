@@ -1,15 +1,16 @@
 $primary-purple: #9333eae6;
 $highlight-purple: #bc80f8e6;
 
+// Import normalize.css for consistent baseline styling
+@import-normalize;
+
 .center-flexed {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-//
 // General styles
-//
 body input:focus,
 body select:focus,
 body button:focus-within {
