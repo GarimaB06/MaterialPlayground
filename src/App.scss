@@ -1,9 +1,6 @@
 $primary-purple: #9333eae6;
 $highlight-purple: #bc80f8e6;
 
-// Import normalize.css for consistent baseline styling
-@import-normalize;
-
 .center-flexed {
 	display: flex;
 	align-items: center;
@@ -71,7 +68,7 @@ button {
 	right: 0;
 	padding: 8px;
 	background-color: $primary-purple;
-	border-radius: 50%;
+	border-radius: 32px;
 	cursor: pointer;
 	transform: translate(+50%);
 	z-index: 4;
